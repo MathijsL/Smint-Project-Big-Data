@@ -8,5 +8,5 @@ print """
 <body>
 <b>Dit is html vanuit python code!</b>
 </body>
-</html
+</html>
 """
