@@ -49,17 +49,20 @@ function InitCustomMarker(){
 		{
 			var weatherIcon = weather == 1 ? "<i class='fa fa-cloud'></i>" : "<i class='fa fa-sun-o'></i>"
 		
-			var walkOrNot = this.args.walk < this.args.transport;
+			var walkOrNot = parseFloat(this.args.dist) < 8.0;
 			var walkColor = walkOrNot ? "#328432" : "#CC0000";
 			var transportColor = !walkOrNot ? "#328432" : "#CC0000";
 		
 			this.div = $("<div class='markerContainer'>" +
-						"<div class='markerDistanceContainer'><b>"+this.args.dist+"</b></div>" +
-						"<div class='markerWeatherContainer'>"+weatherIcon+"</div>" +
+						"<div class='markerDistanceContainer' style='background: url(\""+this.args.image+"\") no-repeat;'><b>"+this.args.dist+"</b></div>" +
 						"<div class='markerWalkContainer' style='background-color: "+walkColor+"'><i class='fa fa-male'></i></div>" +
 						"<div class='markerCarContainer' style='background-color: "+transportColor+"'><i class='fa fa-car'></i></div>" +
 					"</div>");
 			this.drawn = true;
+			this.div.bind('click', this.args, function(event) {
+				var data = event.data;
+				ShowMarkerInfo(data);
+			});
 			
 			var panes = this.getPanes();
 			$(panes.overlayImage).append(this.div);

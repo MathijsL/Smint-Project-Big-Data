@@ -7,7 +7,7 @@
 ## (4) longitude
 
 
-def supermarkten():  #ontvangt geen parameter
+def GetSupermarkten():  #ontvangt geen parameter
     import csv
     with open('supermarkten.csv', 'rb') as f:
         regel = csv.reader(f, delimiter=';', quoting=csv.QUOTE_NONE)
@@ -21,6 +21,3 @@ def supermarkten():  #ontvangt geen parameter
             csvinfo[x]=(rij);
             x += 1
         return csvinfo
-
-tabsuper = supermarkten()
-#print tabsuper
