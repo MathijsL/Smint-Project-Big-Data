@@ -2,9 +2,11 @@
 
 import markten
 import supermarkten
+import ret
 import locatie
 import cgitb
 import weerdata
+import datetime
 
 # set the errors to visible
 cgitb.enable(display=1)
@@ -23,8 +25,18 @@ pythondata = "["
 
 # add the python data for the markets
 pythondata = pythondata + "{\"name\": \"Markten\", \"weather\" : \""+huidigweer+"\", \"data\": ["
-week = (1,1,1,1,1,1,1)      
+
+week = [0,0,0,0,0,0,0]
+def dow(date):
+    days=["0","1","2","3","4","5","6"]
+    dayNumber=date.weekday()
+    return days[dayNumber]
+
+today = datetime.date.today()
+vandaag=int(dow(today))
+week[vandaag]=1
 marktadres = markten.GetMarkten(week)
+
 
 # add the data for each individual market
 for x in range(0,len(marktadres)):
@@ -50,6 +62,19 @@ for x in range(0,len(supermarktenadres)):
 
 pythondata = pythondata[:-1]
 pythondata = pythondata + "]}"
+
+##### RET DATA #####
+###kunnen we verschillende vinkjes voor verschillende type vervoer toevoegen?
+#pythondata = pythondata + "{\"name\": \"Haltes\", \"weather\" : \""+huidigweer+"\", \"data\": ["
+#retadres = ret.GetHalte("M")
+
+#for x in range(0,len(retadres)):   #dit stukje werkt nog niet, afgesterd
+    ###print retadres[x][3], retadres[x][4]
+    #retafstand = locatie.GetDistanceMeters(userlocation[0], userlocation[1], retadres[x][3], retadres[x][4], google_api_key)
+    #pythondata = pythondata + "{ name: '"+str(retadres[x][0])+"', dist: '"+str(retafstand)+"', walk: 300, transport: 100, lat: "+str(retadres[x][3])+", lng: "+str(retadres[x][4]) + " },"
+
+#pythondata = pythondata[:-1]
+#pythondata = pythondata + "]}"
 
 pythondata = pythondata + "]";
 
