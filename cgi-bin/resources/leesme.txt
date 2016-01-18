@@ -1,0 +1,1 @@
+hier nogmaals submap resources om lokaal (vanuit cgi-bin) te kunnen testen
