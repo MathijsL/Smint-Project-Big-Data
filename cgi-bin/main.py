@@ -28,14 +28,17 @@ pythondata = pythondata + "{\"name\": \"Markten\", \"weather\" : \""+huidigweer+
 
 week = [0,0,0,0,0,0,0]
 def dow(date):
-    days=["0","1","2","3","4","5","6"]
+    days=["3","1","2","3","4","5","6"]   #maandag wordt als donderdag doorgegeven
     dayNumber=date.weekday()
     return days[dayNumber]
 
 today = datetime.date.today()
+print "vandaag is: ", today
 vandaag=int(dow(today))
+#print vandaag
 week[vandaag]=1
 marktadres = markten.GetMarkten(week)
+#print marktadres
 
 
 # add the data for each individual market
@@ -58,23 +61,23 @@ supermarktenadres = supermarkten.GetSupermarkten()
 for x in range(0,len(supermarktenadres)):
 	supermarktnaam = supermarktenadres[x][0].replace("\xa0", "").replace("&nbsp;", "") # this is added in the CSV file for some reason
 	supermarktafstand = locatie.GetDistanceMeters(userlocation[0], userlocation[1], supermarktenadres[x][3], supermarktenadres[x][4], google_api_key)
-	pythondata = pythondata + "{ \"directions\": \""+marktafstand[1]+"\", \"image\" : \"supermarkticon.jpg\", \"name\": \""+str(supermarktnaam)+"\", \"dist\": \""+str(supermarktafstand[0])+"\", \"lat\": \""+str(supermarktenadres[x][3])+"\", \"lng\": \""+str(supermarktenadres[x][4]) + "\" },"
+	pythondata = pythondata + "{ \"directions\": \""+supermarktafstand[1]+"\", \"image\" : \"supermarkticon.jpg\", \"name\": \""+str(supermarktnaam)+"\", \"dist\": \""+str(supermarktafstand[0])+"\", \"lat\": \""+str(supermarktenadres[x][3])+"\", \"lng\": \""+str(supermarktenadres[x][4]) + "\" },"
 
 pythondata = pythondata[:-1]
-pythondata = pythondata + "]}"
+pythondata = pythondata + "]},"
 
 ##### RET DATA #####
 ###kunnen we verschillende vinkjes voor verschillende type vervoer toevoegen?
-#pythondata = pythondata + "{\"name\": \"Haltes\", \"weather\" : \""+huidigweer+"\", \"data\": ["
-#retadres = ret.GetHalte("M")
+pythondata = pythondata + "{\"name\": \"Haltes\", \"weather\" : \""+huidigweer+"\", \"data\": ["
+retadres = ret.GetHalte("M")
 
-#for x in range(0,len(retadres)):   #dit stukje werkt nog niet, afgesterd
-    ###print retadres[x][3], retadres[x][4]
-    #retafstand = locatie.GetDistanceMeters(userlocation[0], userlocation[1], retadres[x][3], retadres[x][4], google_api_key)
-    #pythondata = pythondata + "{ name: '"+str(retadres[x][0])+"', dist: '"+str(retafstand)+"', walk: 300, transport: 100, lat: "+str(retadres[x][3])+", lng: "+str(retadres[x][4]) + " },"
+for x in range(0,len(retadres)):   #dit stukje werkt nog niet, afgesterd
+    ##print retadres[x][3], retadres[x][4]
+    retafstand = locatie.GetDistanceMeters(userlocation[0], userlocation[1], retadres[x][3], retadres[x][4], google_api_key)
+    pythondata = pythondata + "{ name: '"+str(retadres[x][0])+"', dist: '"+str(retafstand)+"', walk: 300, transport: 100, lat: "+str(retadres[x][3])+", lng: "+str(retadres[x][4]) + " },"
 
-#pythondata = pythondata[:-1]
-#pythondata = pythondata + "]}"
+pythondata = pythondata[:-1]
+pythondata = pythondata + "]}"
 
 pythondata = pythondata + "]";
 

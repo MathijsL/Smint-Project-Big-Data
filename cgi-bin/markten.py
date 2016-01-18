@@ -12,11 +12,10 @@
 import csv
 
 def GetMarkten(week):
-    with open('markten.csv', 'rb') as f:
+    with open('resources/markten.csv', 'rb') as f:
         regel = csv.reader(f, delimiter=';', quoting=csv.QUOTE_NONE)
         # zorg er eerst voor dat de csv in een list wordt gelezen
         csvinfo = []
-        dictinfo = {}
         for row in regel:
             if   row[0] == "Maandag": dagnr = 0
             elif row[0] == "Dinsdag": dagnr = 1
@@ -35,7 +34,7 @@ def GetMarkten(week):
 
     for x in range(len(week)):
         if week[x] == 1:
-            print "dagnr is aan: ", x
+            #print "dagnr is aan: ", x
             for i in range(0,len(csvinfo)):
                 if csvinfo[i][0] == x:
                     print str(csvinfo[i][0]) + "," + csvinfo[i][1] + "," + csvinfo[i][2]

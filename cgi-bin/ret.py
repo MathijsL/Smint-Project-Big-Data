@@ -19,7 +19,7 @@ def GetHalte(x):  #type weglaten levert geeft alle haltes terug
         pass
 
     import csv
-    with open('ret_met_type.csv', 'rb') as f:
+    with open('resources/ret_met_type.csv', 'rb') as f:
         regel = csv.reader(f, delimiter=';', quoting=csv.QUOTE_NONE)
         csvinfo = []
         for row in regel:
