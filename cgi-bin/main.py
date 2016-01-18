@@ -74,7 +74,7 @@ retadres = ret.GetHalte("M")
 for x in range(0,len(retadres)):   #dit stukje werkt nog niet, afgesterd
     ##print retadres[x][3], retadres[x][4]
     retafstand = locatie.GetDistanceMeters(userlocation[0], userlocation[1], retadres[x][3], retadres[x][4], google_api_key)
-    pythondata = pythondata + "{ name: '"+str(retadres[x][0])+"', dist: '"+str(retafstand)+"', walk: 300, transport: 100, lat: "+str(retadres[x][3])+", lng: "+str(retadres[x][4]) + " },"
+    pythondata = pythondata + "{ \"directions\": \""+supermarktafstand[1]+"\", \"image\" : \"metro.jpg\", \"name\": \""+str(retadres[x][0])+"\", \"dist\": \""+str(retafstand[0])+"\", \"walk\": \"300\", \"transport\": \"100\", \"lat\": \""+str(retadres[x][3])+"\", \"lng\": \""+str(retadres[x][4]) + "\" },"
 
 pythondata = pythondata[:-1]
 pythondata = pythondata + "]}"
