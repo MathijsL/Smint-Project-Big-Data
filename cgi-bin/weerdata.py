@@ -4,6 +4,7 @@ import urllib2
 import json
 import cgitb
 
+# set the errors to visible
 cgitb.enable(display=1)
 
 def GetWeerdata():

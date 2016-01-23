@@ -19,6 +19,7 @@ userlocation = [51.90923, 4.486283]
 
 pythondata = ""
 
+# create cache file to make sure we do not cross the api's request limits
 if os.path.exists('sourcedata.tmp'):
 	pythondata = codecs.open('sourcedata.tmp', 'r', 'utf-8').read()
 else:	
@@ -33,6 +34,7 @@ else:
 	# add the python data for the markets
 	pythondata = pythondata + "{\"name\": \"Markten\", \"weather\" : \""+huidigweer+"\", \"data\": [" 
 	
+	# get the market data
 	week = [1,1,1,1,1,1,1]
 	marktadres = markten.GetMarkten(week)
 
@@ -65,7 +67,7 @@ else:
 	pythondata = pythondata + "{\"name\": \"Haltes\", \"weather\" : \""+huidigweer+"\", \"data\": ["
 	retadres = ret.GetHalte("M")
 
-	for x in range(0,len(retadres)):   #dit stukje werkt nog niet, afgesterd
+	for x in range(0,len(retadres)):   
 		retafstand = locatie.GetDistanceMeters(userlocation[0], userlocation[1], retadres[x][3], retadres[x][4], google_api_key)
 		pythondata = pythondata + "{ \"directions\": \""+supermarktafstand[1]+"\", \"image\" : \"metro.jpg\", \"name\": \""+str(retadres[x][0])+"\", \"dist\": \""+str(retafstand[0])+"\", \"walk\": \"300\", \"transport\": \"100\", \"lat\": \""+str(retadres[x][3])+"\", \"lng\": \""+str(retadres[x][4]) + "\" },"
 	

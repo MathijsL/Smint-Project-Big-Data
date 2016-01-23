@@ -3,6 +3,10 @@
 import urllib2
 import urllib
 import json
+import cgitb
+
+# set the errors to visible
+cgitb.enable(display=1)
 
 def GetLatLong(address, api_key):
 	# Get JSON data from google

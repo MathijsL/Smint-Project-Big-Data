@@ -3,8 +3,10 @@
 import csv
 import cgitb
 
+# set the errors to visible
 cgitb.enable(display=1)
 
+# function returns all supermarkets
 def GetSupermarkten(): 
     with open('resources/supermarkten.csv', 'rb') as f:
         regel = csv.reader(f, delimiter=';', quoting=csv.QUOTE_NONE)

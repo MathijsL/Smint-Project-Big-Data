@@ -1,12 +1,10 @@
-## ret.py
-## geeft 5 kolommen in deze volgorde terug:
-## (0) naam vd halte,
-## (1) type halte,
-## (2) detailoms halte,
-## (3) latitude,
-## (4) longitude
-## verwachte parameter: B voor bus, T voor tram, M voor metro en leeg voor alles
+#!/usr/local/bin/python
 
+import csv
+import cgitb
+
+# set the errors to visible
+cgitb.enable(display=1)
 
 def GetHalte(x):  #type weglaten levert geeft alle haltes terug
     if   x == "B":
@@ -28,19 +26,10 @@ def GetHalte(x):  #type weglaten levert geeft alle haltes terug
                     row[3] = row[3].replace(",", ".")
                     row[4] = row[4].replace(",", ".")
                     rij=(row[0], row [1], row[2], row[3], row[4])
-                    #print rij
                     csvinfo.append(rij)
             else:
                 row[3] = row[3].replace(",", ".")
                 row[4] = row[4].replace(",", ".")
                 rij=(row[0], row [1], row[2], row[3], row[4])
-                #print rij
                 csvinfo.append(rij)
         return csvinfo
-
-#tabhalte = GetHalte("")
-#print tabhalte.item
-#count = 0
-#for i in tabhalte:
-    #count += 1
-#print count
